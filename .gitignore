@@ -11,8 +11,9 @@ implementation_plan.md
 *.env
 backend/lib/config.properties.local
 
-# Runtime Log files (Generated dynamically at runtime)
+# Runtime Log files & Folders (Generated dynamically at runtime)
 *.log
+log/
 backend/log/
 
 # Python
