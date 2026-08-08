@@ -11,6 +11,10 @@ implementation_plan.md
 *.env
 backend/lib/config.properties.local
 
+# Runtime Log files (Generated dynamically at runtime)
+*.log
+backend/log/
+
 # Python
 __pycache__/
 *.py[cod]
@@ -18,7 +22,6 @@ __pycache__/
 backend/.venv/
 venv/
 ENV/
-backend/log/*.log
 
 # Node & Frontend
 frontend/node_modules/
