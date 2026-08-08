@@ -4,6 +4,8 @@
 brain/
 *.text
 *.txt
+walkthrough.md
+implementation_plan.md
 
 # Environment variables & secrets
 *.env
