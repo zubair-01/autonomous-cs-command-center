@@ -1,0 +1,27 @@
+# Environment variables & secrets
+*.env
+backend/lib/config.properties.local
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+backend/.venv/
+venv/
+ENV/
+backend/log/*.log
+
+# Node & Frontend
+frontend/node_modules/
+frontend/dist/
+frontend/.nx/
+frontend/.cache/
+
+# IDE & OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Docker & Temporary Data
+*.sqlite3

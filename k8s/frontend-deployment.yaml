@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cs-frontend-deployment
+  labels:
+    app: cs-frontend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: cs-frontend
+  template:
+    metadata:
+      labels:
+        app: cs-frontend
+    spec:
+      containers:
+      - name: cs-frontend
+        image: cs-command-center-frontend:latest
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 80
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "100m"
+          limits:
+            memory: "256Mi"
+            cpu: "250m"
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: cs-frontend-service
+spec:
+  selector:
+    app: cs-frontend
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80
+  type: ClusterIP

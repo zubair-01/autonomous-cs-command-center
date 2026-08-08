@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cs-worker-deployment
+  labels:
+    app: cs-worker
+spec:
+  replicas: 3  # Scale horizontally to handle 10,000+ support tickets
+  selector:
+    matchLabels:
+      app: cs-worker
+  template:
+    metadata:
+      labels:
+        app: cs-worker
+    spec:
+      containers:
+      - name: cs-worker
+        image: cs-command-center-worker:latest
+        imagePullPolicy: IfNotPresent
+        env:
+        - name: DATABASE_DB_HOST
+          value: "cs-postgres-service"
+        - name: KAFKA_BOOTSTRAP_SERVERS
+          value: "cs-kafka-service:9092"
+        - name: REDIS_REDIS_HOST
+          value: "cs-redis-service"
+        resources:
+          requests:
+            memory: "512Mi"
+            cpu: "500m"
+          limits:
+            memory: "1024Mi"
+            cpu: "1000m"

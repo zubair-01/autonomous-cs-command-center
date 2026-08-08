@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cs-api-deployment
+  labels:
+    app: cs-api
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: cs-api
+  template:
+    metadata:
+      labels:
+        app: cs-api
+    spec:
+      containers:
+      - name: cs-api
+        image: cs-command-center-api:latest
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8000
+        env:
+        - name: DATABASE_DB_HOST
+          value: "cs-postgres-service"
+        - name: KAFKA_BOOTSTRAP_SERVERS
+          value: "cs-kafka-service:9092"
+        - name: REDIS_REDIS_HOST
+          value: "cs-redis-service"
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "250m"
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: cs-api-service
+spec:
+  selector:
+    app: cs-api
+  ports:
+  - protocol: TCP
+    port: 8000
+    targetPort: 8000
+  type: ClusterIP
