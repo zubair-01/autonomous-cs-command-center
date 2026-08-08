@@ -1,3 +1,8 @@
+# Workspace Customizations & Agent Rules
+.agents/
+.gemini/
+brain/
+
 # Environment variables & secrets
 *.env
 backend/lib/config.properties.local
